@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Planificateur de trajet en véhicule électrique en FRANCE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .vehicle-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .vehicle-image {
+            width: 100px;
+            height: auto;
+            margin-right: 15px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Planificateur de trajet en véhicule électrique en FRANCE</h1>
+    {% if erreur %}
+    <p style="color:red;">{{ erreur }}</p>
+    {% endif %}
+    <form method="post">
+        <label for="ville_depart">Ville de départ :</label><br>
+        <input type="text" id="ville_depart" name="ville_depart" required><br><br>
+        <label for="ville_arrivee">Ville d'arrivée :</label><br>
+        <input type="text" id="ville_arrivee" name="ville_arrivee" required><br><br>
+
+        <label for="vehicule">Sélectionnez votre véhicule :</label><br>
+
+        <select id="vehicule" name="vehicule" required>
+            {% for vehicule in vehicules %}
+            <option value="{{ vehicule.id }}">
+                {{ vehicule.naming.make }} {{ vehicule.naming.model }} {{ vehicule.naming.version }}
+                - Autonomie: {{ vehicule.range.chargetrip_range.best }} km (max), {{ vehicule.range.chargetrip_range.worst }} km (min)
+            </option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Calculer l'itinéraire">
+    </form>
+
+    {% if map_html and distance %}
+    <h2>Votre itinéraire :</h2>
+    <p class="distance">Distance totale : {{ distance | round(2) }} km</p>
+    <p class="arrets">Nombre d'arrêts de recharge nécessaires : {{ nombre_arrets }}</p>
+    <div id="map-container">
+        {{ map_html|safe }}
+    </div>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Itinéraire</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Votre itinéraire</h1>
+
+    <!-- Afficher la distance -->
+    <p>Distance totale : {{ distance | round(2) }} km</p>
+
+    <div id="map-container">
+        {{ map_html|safe }}
+    </div>
+
+    <a href="/">Retour</a>
+</body>
+</html>
