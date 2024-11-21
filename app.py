@@ -12,7 +12,7 @@ app = Flask(__name__)
 # @@@@@@@@@@@@@@@VRAI CODE@@@@@@@@@@@@@@@@@@@@@@@
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
 
-# Remplacez ces variables par vos propres clés API
+# Clé API à mettre dans une variable d'environnement
 CHARGETRIP_API_KEY = '670f7296021ae87118926adb'
 CHARGETRIP_APP_ID = '670f7296021ae87118926add'
 OPENROUTESERVICE_API_KEY = '5b3ce3597851110001cf624844e454ed2cda41739d0e71bbc67de648'
